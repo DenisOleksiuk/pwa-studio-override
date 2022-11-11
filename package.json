@@ -1,0 +1,37 @@
+{
+    "name": "pwa-studio-override",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DenisOleksiuk/pwa-studio-override.git"
+    },
+    "author": {
+        "name": "Denis Oleksiuk",
+        "email": "denisolexyuk@gmail.com",
+        "url": "https://www.linkedin.com/in/denis-oleksiuk-46b21b1b0/"
+    },
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DenisOleksiuk/pwa-studio-override/issues"
+    },
+    "homepage": "https://github.com/DenisOleksiuk/pwa-studio-override#readme",
+    "pwa-studio": {
+        "targets": {
+            "intercept": "intercept"
+        }
+    },
+    "peerDependencies": {
+        "@magento/pwa-buildpack": "~9.0.0",
+        "@magento/venia-ui": "~7.0.0",
+        "react": "~17.0.1"
+    },
+    "dependencies": {
+        "babel-plugin-require-context-hook": "^1.0.0",
+        "globby": "^11.0.3"
+    }
+}
