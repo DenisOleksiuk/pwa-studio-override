@@ -13,7 +13,7 @@ module.exports = (targetables, settings) => {
     const globby = require('globby');
     const fs = require('fs');
     const path = require('path');
-    const magentoPath = path.resolve(__dirname, '..', '..', '..', '@magento');
+    const magentoPath = path.resolve(__dirname, '..', '..', '@magento');
 
     (async () => {
         // Load CSS files from src/components
@@ -22,15 +22,11 @@ module.exports = (targetables, settings) => {
             '..',
             '..',
             '..',
-            '..',
             'src',
             'components'
         );
-        const paths = await globby([componentsPath], {
-            expandDirectories: {
-                extensions: [extension]
-            }
-        });
+
+        const paths = await globby(`${componentsPath}/**/*.${extension}`);
 
         paths.forEach((myPath) => {
             let absolutePath = myPath.replace(
@@ -53,13 +49,12 @@ module.exports = (targetables, settings) => {
                      * This means we matched a local file to something in venia-ui
                      * Next: find the JS component from our CSS file name
                      */
-                    const jsComponent = absolutePath.replace('.module.css', 'js');
+                    const jsComponentPath = absolutePath.replace('.module.css', '.js');
 
                     // Load the relevant 'venia-ui' component
-                    const componentEsModule = targetables.reactComponent(jsComponent);
-                    const module = targetables.module(jsComponent);
+                    const module = targetables.module(jsComponentPath);
                     // Add import to for the custom CSS classes
-                    componentEsModule.addImport(`import customClasses from "${myPath}"`);
+                    module.addImport(`import customClasses from "${myPath}"`);
                     // Update the `mergeClasses()` method to inject the additional custom css
                     module.insertAfterSource(
                         'const classes = useStyle(defaultClasses, ',
