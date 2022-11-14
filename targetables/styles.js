@@ -52,7 +52,7 @@ module.exports = (targetables, settings) => {
                     const jsComponentPath = absolutePath.replace('.module.css', '.js');
 
                     // Load the relevant 'venia-ui' component
-                    const module = targetables.module(jsComponentPath);
+                    const module = targetables.esModule(jsComponentPath);
                     // Add import to for the custom CSS classes
                     module.addImport(`import customClasses from "${myPath}"`);
                     // Update the `mergeClasses()` method to inject the additional custom css

@@ -12,7 +12,7 @@ module.exports = (targetables) => {
     const globby = require('globby');
     const fs = require('fs');
     const path = require('path');
-    const magentoPath = path.resolve(__dirname, '..', '..', '..', '@magento');
+    const magentoPath = path.resolve(__dirname, '..', '..', '@magento');
 
     // Context loader allows us to execute functions in the targeted file
     const requireContextLoader = require('babel-plugin-require-context-hook/register')();
@@ -21,7 +21,6 @@ module.exports = (targetables) => {
     (async () => {
         const componentsPath = path.resolve(
             __dirname,
-            '..',
             '..',
             '..',
             '..',
@@ -48,11 +47,11 @@ module.exports = (targetables) => {
                     const component = getReactComponent(absolutePath);
 
                     /**
-                     * Load the targetables file for the component and execute the interceptComponent function
+                     * Load the targetables file for the component and execute the function
                      * We also pass in the component itself so we don't need to load it in the file
                      */
-                    const componentInterceptor = require(myPath);
-                    componentInterceptor.interceptComponent(component);
+                    const componentInterceptorFn = require(myPath);
+                    componentInterceptorFn(component);
                 }
             });
         });
